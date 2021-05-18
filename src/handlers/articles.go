@@ -5,14 +5,15 @@ import (
 	"strconv"
 
 	"github.com/gin-gonic/gin"
+	"github.com/thealphadollar/Go-Gin-Microservices-PG/src/helpers"
 	"github.com/thealphadollar/Go-Gin-Microservices-PG/src/models"
 )
 
 func ShowIndexPage(c *gin.Context) {
-	c.HTML(http.StatusOK, "index.html", gin.H{
+	helpers.RenderResponse(c, gin.H{
 		"title":   "Home Page",
 		"payload": models.GetAllArticles(),
-	})
+	}, "index.html")
 }
 
 func GetArticle(c *gin.Context) {
@@ -29,10 +30,10 @@ func GetArticle(c *gin.Context) {
 				"message": err.Error(),
 			})
 		} else {
-			c.HTML(http.StatusOK, "article.html", gin.H{
+			helpers.RenderResponse(c, gin.H{
 				"title":   article.Title,
 				"payload": article,
-			})
+			}, "article.html")
 		}
 	}
 }

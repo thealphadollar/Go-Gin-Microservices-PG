@@ -30,7 +30,7 @@ func TestGetArticleByIDExists(t *testing.T) {
 	articleID1, err := models.GetArticleByID(1)
 
 	if err != nil || alist[1].ID != articleID1.ID ||
-		alist[1].Content != articleID1.Content || alist[1].Title != articleID1.Content {
+		alist[1].Content != articleID1.Content || alist[1].Title != articleID1.Title {
 		t.Fail()
 	}
 }

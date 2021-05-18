@@ -30,7 +30,7 @@ func TestShowIndexPageUnauthenticated(t *testing.T) {
 func TestShowArticlePageUnauthenticatedSuccess(t *testing.T) {
 	r := getRouter(true)
 
-	r.GET("/", handlers.GetArticle)
+	r.GET("/article/view/:article_id", handlers.GetArticle)
 
 	req, _ := http.NewRequest("GET", "/article/view/0", nil)
 
@@ -47,7 +47,7 @@ func TestShowArticlePageUnauthenticatedSuccess(t *testing.T) {
 func TestShowArticlePageUnauthenticatedWrongID(t *testing.T) {
 	r := getRouter(true)
 
-	r.GET("/", handlers.GetArticle)
+	r.GET("/article/view/:article_id", handlers.GetArticle)
 
 	req, _ := http.NewRequest("GET", "/article/view/2", nil)
 
@@ -60,7 +60,7 @@ func TestShowArticlePageUnauthenticatedWrongID(t *testing.T) {
 func TestShowArticlePageUnauthenticatedStringID(t *testing.T) {
 	r := getRouter(true)
 
-	r.GET("/", handlers.GetArticle)
+	r.GET("/article/view/:article_id", handlers.GetArticle)
 
 	req, _ := http.NewRequest("GET", "/article/view/string", nil)
 

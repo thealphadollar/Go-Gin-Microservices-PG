@@ -7,6 +7,7 @@ import (
 )
 
 func RenderResponse(c *gin.Context, data gin.H, template string) {
+	data["is_logged_in"], _ = c.Get("is_logged_in")
 	switch c.Request.Header.Get("Accept") {
 	case "application/json":
 		c.JSON(http.StatusOK, data["payload"])

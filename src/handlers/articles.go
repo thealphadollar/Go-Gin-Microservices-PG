@@ -37,3 +37,29 @@ func GetArticle(c *gin.Context) {
 		}
 	}
 }
+
+func ShowArticleCreationPage(c *gin.Context) {
+	helpers.RenderResponse(c, gin.H{
+		"title": "Create New Article",
+	}, "create-article.html")
+}
+
+func CreateArticle(c *gin.Context) {
+	title := c.PostForm("title")
+	content := c.PostForm("content")
+
+	if a, err := models.CreateNewArticle(title, content); err == nil {
+		helpers.RenderResponse(
+			c,
+			gin.H{
+				"title":   "Creation Successful",
+				"payload": a,
+			},
+			"submission-successful.html",
+		)
+	} else {
+		c.AbortWithStatusJSON(http.StatusBadRequest, gin.H{
+			"error": err.Error(),
+		})
+	}
+}

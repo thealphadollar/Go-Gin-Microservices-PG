@@ -1,0 +1,8 @@
+{{ template "header.html" .}}
+
+<div>
+    <strong>The article was succesfully created!</strong>
+    <a href="/article/view/{{.payload.ID}}">{{.payload.Title}}</a>
+</div>
+
+{{ template "footer.html" .}}

@@ -7,6 +7,7 @@ import (
 	"testing"
 
 	"github.com/gin-gonic/gin"
+	"github.com/thealphadollar/Go-Gin-Microservices-PG/src/middleware"
 	"github.com/thealphadollar/Go-Gin-Microservices-PG/src/models"
 )
 
@@ -24,13 +25,14 @@ func getRouter(withTemplates bool) *gin.Engine {
 	if withTemplates {
 		r.LoadHTMLGlob("../templates/*")
 	}
+	r.Use(middleware.SetUserStatus())
 	return r
 }
 
 // helper to test response
 func testHTTPResponse(t *testing.T, r *gin.Engine, req *http.Request, f func(w *httptest.ResponseRecorder) bool) {
-	w := httptest.NewRecorder()
 
+	w := httptest.NewRecorder()
 	r.ServeHTTP(w, req)
 	if !f(w) {
 		t.Fail()
